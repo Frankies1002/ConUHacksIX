@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import chatapi
+import pymongo
+
 
 # Use session_state to store preferences persistently
 if "likes" not in st.session_state:
@@ -49,29 +51,27 @@ def show_home():
             st.warning("Please enter some preferences before generating a recipe.")
 
 def show_dashboard():
-    """Display a dashboard with charts."""
-    st.header("📊 Dashboard")
-    st.write("Interactive wellness analytics and charts will go here.")
+    # MongoDB connection URI (Replace with your actual URI)
+    mongo_uri = "mongodb+srv://toca:jmeFGCz3HqgtGOIu@cluster0.tln4p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-    st.subheader("Example Chart")
+    # Connect to MongoDB
+    client = pymongo.MongoClient(mongo_uri)
 
-    data = pd.DataFrame(
-        np.random.randn(20, 3),
-        columns=['Metric A', 'Metric B', 'Metric C']
-    )
-    st.line_chart(data)
+    # Select database and collection
+    db = client["mongodbVSCodePlaygroundDB"]  # Replace with your database name
+    collection = db["food_nutrition"]  # Replace with your collection name
 
-    # Sample recipe data
-    recipe_data = {
-        'Recipe': ['Chicken Salad', 'Pasta Carbonara', 'Greek Yogurt Bowl', 'Salmon with Rice', 'Vegetable Stir Fry'],
-        'Calories': [350, 650, 280, 450, 300]
-    }
+    # Fetch data (convert cursor to list of dictionaries)
+    data = list(collection.find())
 
-    df = pd.DataFrame(recipe_data)
-    st.title('Recipe Calorie Dashboard')
-    st.write('Visualize the calorie content of different recipes')
+    # Convert to Pandas DataFrame
+    df = pd.DataFrame(data)
 
-    st.bar_chart(data=df.set_index('Recipe')['Calories'])
+    # Drop MongoDB default '_id' field if not needed
+    df.drop(columns=['_id'], inplace=True, errors='ignore')
+
+    # Display the DataFrame
+    print(df)
 
 def show_pref():
     """Display user preferences and settings."""
