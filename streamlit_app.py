@@ -7,14 +7,14 @@ def main():
 
     st.title("🌿 Wellness Web Weaver")
     st.sidebar.title("Navigation")
-    page = st.sidebar.radio("Go to", ["Home", "Dashboard", "Settings"])
+    page = st.sidebar.radio("Go to", ["Home", "Data", "User_preference"])
 
     if page == "Home":
         show_home()
-    elif page == "Dashboard":
+    elif page == "Data":
         show_dashboard()
-    elif page == "Settings":
-        show_settings()
+    elif page == "User_preference":
+        show_pref()
 
 def show_home():
     st.header("Welcome to Wellness Web Weaver")
@@ -34,14 +34,30 @@ def show_dashboard():
     )
     st.line_chart(data)
 
-def show_settings():
-    st.header("⚙️ Settings")
+def show_pref():
+    st.header("⚙️ User Settings")
     st.write("Customize your wellness experience here.")
 
     user_name = st.text_input("Enter your name:")
     st.write(f"Hello, {user_name}!")
 
+    st.write("Allergies")
+
+    a_nuts = st.checkbox("Nuts")
+    a_gluten = st.checkbox("gluten")
+    a_egg = st.checkbox("Egg")
+
+    like = []
+    likes = st.text_input("Enter food preference")
+    if likes == 'x' :
+        like.append(likes)
+    
+    st.write(f"{like} ")
+    
+    deficiency = st.text_input("Enter nutrient deficiency")
+
     if st.button("Save Settings"):
         st.success("Settings saved successfully!")
+
 
 main()
