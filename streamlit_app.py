@@ -9,7 +9,7 @@ def main():
     st.set_page_config(page_title="Wellness Web Weaver", layout="wide")
 
     st.title("🌿 Wellness Web Weaver")
-    st.sidebar.title("Navigation")
+    st.sidebar.title("Menu")
     page = st.sidebar.radio("Go to", ["Home", "Data", "User_preference"])
 
     if page == "Home":
@@ -21,9 +21,17 @@ def main():
 
 def show_home():
     st.header("Welcome to Wellness Web Weaver")
-    st.write("This is a fully converted Python & Streamlit version of your original web app.")
+    st.write("An app that make recipe depending on your need")
     st.write("\n---\n")
     st.image("https://source.unsplash.com/800x400/?wellness,health")
+    if st.button("Create recipe"):
+        #answer = "can you make multiple recipe with these ingredient?"
+        #Append answer with list of ingredient
+        #prompt = chatapi.get_ai_response(answer)
+        #st.write(f"{prompt}")
+        print("hello world")
+
+    
 
 def show_dashboard():
     st.header("📊 Dashboard")
@@ -36,6 +44,22 @@ def show_dashboard():
         columns=['Metric A', 'Metric B', 'Metric C']
     )
     st.line_chart(data)
+
+    # Create sample recipe data
+    recipe_data = {
+        'Recipe': ['Chicken Salad', 'Pasta Carbonara', 'Greek Yogurt Bowl', 'Salmon with Rice', 'Vegetable Stir Fry'],
+        'Calories': [350, 650, 280, 450, 300]
+    }
+
+    # Create DataFrame
+    df = pd.DataFrame(recipe_data)
+
+    # Create title and description
+    st.title('Recipe Calorie Dashboard')
+    st.write('Visualize the calorie content of different recipes')
+
+    # Create bar chart
+    st.bar_chart(data=df.set_index('Recipe')['Calories'])
 
 def show_pref():
     st.header("⚙️ User Settings")
