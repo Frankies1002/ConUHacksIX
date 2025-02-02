@@ -64,5 +64,5 @@ We’re proud that we built something functional and useful by the end of the pr
    ```
    $ streamlit run streamlit_app.py
    ```
-Note: requires your own MongoDB database
+Note: requires your own MongoDB database and ChatGPT key
 
