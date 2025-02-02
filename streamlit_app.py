@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+#import chatapi
+
+like = []
 
 def main():
     st.set_page_config(page_title="Wellness Web Weaver", layout="wide")
@@ -47,17 +50,22 @@ def show_pref():
     a_gluten = st.checkbox("gluten")
     a_egg = st.checkbox("Egg")
 
-    like = []
+    global like
     likes = st.text_input("Enter food preference")
-    if likes == 'x' :
-        like.append(likes)
-    
+    like = like.append(likes)
+
     st.write(f"{like} ")
-    
+
     deficiency = st.text_input("Enter nutrient deficiency")
 
+ 
     if st.button("Save Settings"):
         st.success("Settings saved successfully!")
+
+    #answer = "do you like potato?"
+    #prompt = chatapi.get_ai_response(answer)
+
+    st.write(f"something,{prompt}")
 
 
 main()
