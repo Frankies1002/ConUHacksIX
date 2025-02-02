@@ -2,7 +2,7 @@ import pymongo
 import pandas as pd
 
 # MongoDB connection URI (Replace with your actual URI)
-mongo_uri = "mongodb+srv://toca:jmeFGCz3HqgtGOIu@cluster0.tln4p.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+mongo_uri =
 
 # Connect to MongoDB
 client = pymongo.MongoClient(mongo_uri)
